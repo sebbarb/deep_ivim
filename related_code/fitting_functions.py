@@ -27,13 +27,13 @@ def fit_segmented(b, x_dw):
   try:
     high_b = b[b>=250]
     high_x_dw = x_dw[b>=250]
-    # bounds = (0, 1)
-    bounds = ([0, 0.4], [0.005, 1])
+    bounds = (0, 1)
+    # bounds = ([0, 0.4], [0.005, 1])
     params, _ = curve_fit(lambda high_b, Dt, int : int*np.exp(-high_b*Dt), high_b, high_x_dw, p0=(0.001, 0.9), bounds=bounds)
     Dt, Fp = params[0], 1-params[1]
     x_dw_remaining = x_dw - (1-Fp)*np.exp(-b*Dt)
-    # bounds = (0, 1)
-    bounds = (0.01, 0.3)
+    bounds = (0, 1)
+    # bounds = (0.01, 0.3)
     params, _ = curve_fit(lambda b, Dp : Fp*np.exp(-b*Dp), b, x_dw_remaining, p0=(0.01), bounds=bounds)
     Dp = params[0]
     return order(Dp, Dt, Fp)
@@ -43,8 +43,8 @@ def fit_segmented(b, x_dw):
 
 def fit_least_squares(b, x_dw):
   try:
-    # bounds = (0, 1)
-    bounds = ([0.01, 0, 0], [0.3, 0.005, 0.6])
+    bounds = (0, 1)
+    # bounds = ([0.01, 0, 0], [0.3, 0.005, 0.6])
     params, _ = curve_fit(ivim, b, x_dw, p0=[0.01, 0.001, 0.1], bounds=bounds)
     Dp, Dt, Fp = params[0], params[1], params[2]
     return order(Dp, Dt, Fp)
@@ -85,8 +85,8 @@ def neg_log_posterior(p, b, x_dw, neg_log_prior):
 
 def fit_bayesian(b, x_dw, neg_log_prior):
   try:
-    # bounds = [(0, 1), (0, 1), (0, 1)]
-    bounds = [(0.01, 0.3), (0, 0.005), (0, 0.6)]
+    bounds = [(0, 1), (0, 1), (0, 1)]
+    # bounds = [(0.01, 0.3), (0, 0.005), (0, 0.6)]
     params = minimize(neg_log_posterior, x0=[0.01, 0.001, 0.1], args=(b, x_dw, neg_log_prior), bounds=bounds)
     if not params.success:
       # print(params.message)
