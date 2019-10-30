@@ -10,7 +10,7 @@ A preprint is available at: https://arxiv.org/abs/1903.00095
 
 To use the proposed approach, start by taking a look at the Jupyter notebook deep_ivim_demo.ipynb, or by clicking the Binder button below:
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mathieuboudreau/deep_ivim/master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mathieuboudreau/deep_ivim/master?filepath=deep_ivim_demo.ipynb)
 
 Further code will be uploaded following publication.
 
